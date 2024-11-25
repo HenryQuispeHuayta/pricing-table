@@ -1,0 +1,361 @@
+---
+import type { Plan } from "../plan.type";
+
+interface Props {
+  plans: Plan[];
+}
+const { plans } = Astro.props;
+---
+
+<section>
+  <p></p>
+  {
+    plans.map(({ tier, pricing }) => (
+      <div class="head">
+        <h2 class={tier === "Popular" ? "popular" : ""}>{tier}</h2>
+        <span>${pricing}</span>
+        <h4 style={{ color: tier === "Popular" ? "white" : "" }}>Per month</h4>
+      </div>
+    ))
+  }
+  <div class="service">Website number</div>
+  {
+    plans.map(({ number }) => {
+      return <div>{number === 999 ? "Unlimited" : `${number}`}</div>;
+    })
+  }
+  <div class="service">Server storage</div>
+  {
+    plans.map(({ storage }) => {
+      return (
+        <div>
+          {storage === 9999
+            ? "Unlimited"
+            : storage >= 1024
+              ? `${storage / 1024} TB`
+              : `${storage} GB`}
+        </div>
+      );
+    })
+  }
+  <div class="service">Database</div>
+  {
+    plans.map(({ database }) => {
+      return <div>{database === 999 ? "Unlimited" : `${database}`}</div>;
+    })
+  }
+  <div class="service">Unmetered bandwidth</div>
+  {
+    plans.map(({ tier, bandwidth }) => {
+      return (
+        <div>
+          {bandwidth ? (
+            <img
+              src={`/resources/${tier === "Popular" ? "check.svg" : "check-1.svg"}`}
+              alt="check"
+            />
+          ) : (
+            "-"
+          )}
+        </div>
+      );
+    })
+  }
+  <div class="service">SSD storage</div>
+  {
+    plans.map(({ tier, ssd }) => {
+      return (
+        <div>
+          {ssd ? (
+            <img
+              src={`/resources/${tier === "Popular" ? "check.svg" : "check-1.svg"}`}
+              alt="check"
+            />
+          ) : (
+            "-"
+          )}
+        </div>
+      );
+    })
+  }
+  <div class="service">vCPUS Fontworld</div>
+  {
+    plans.map(({ tier, vcpus }) => {
+      return (
+        <div>
+          {vcpus ? (
+            <img
+              src={`/resources/${tier === "Popular" ? "check.svg" : "check-1.svg"}`}
+              alt="check"
+            />
+          ) : (
+            "-"
+          )}
+        </div>
+      );
+    })
+  }
+  <div class="service">Wordpress install</div>
+  {
+    plans.map(({ tier, wordpress }) => {
+      return (
+        <div>
+          {wordpress ? (
+            <img
+              src={`/resources/${tier === "Popular" ? "check.svg" : "check-1.svg"}`}
+              alt="check"
+            />
+          ) : (
+            "-"
+          )}
+        </div>
+      );
+    })
+  }
+  <div class="service">Server speed</div>
+  {
+    plans.map(({ tier, serverSpeed }) => {
+      return (
+        <div>
+          {serverSpeed ? (
+            <img
+              src={`/resources/${tier === "Popular" ? "check.svg" : "check-1.svg"}`}
+              alt="check"
+            />
+          ) : (
+            "-"
+          )}
+        </div>
+      );
+    })
+  }
+  <p></p>
+  {
+    plans.map(({ tier }) => (
+      <div>
+        <a href="#" style={{ color: tier === "Popular" ? "white" : "" }}>
+          Get Started
+          <img
+            src={`/resources/${tier === "Popular" ? "down arrow" : "down arrow-1"}.svg`}
+            alt="down arrow"
+          />
+        </a>
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  section {
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(5, 250px);
+    grid-template-rows: repeat(10, 1fr);
+    max-width: 1300px;
+    background-color: white;
+    text-align: center;
+    height: 700px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  section > * {
+    border-bottom: 1px solid #4d556233;
+  }
+
+  section > p:nth-child(1),
+  section > div:nth-child(2),
+  section > div:nth-child(3),
+  section > div:nth-child(4),
+  section > div:nth-child(5) {
+    border-bottom: none;
+  }
+
+  section > p:nth-child(46),
+  section > div:nth-child(47),
+  section > div:nth-child(48),
+  section > div:nth-child(49),
+  section > div:nth-child(50) {
+    border-bottom: none;
+  }
+
+  h2 {
+    font-size: 1rem;
+    margin: 1.5rem 0;
+    color: #263fa9;
+  }
+
+  span {
+    font-size: 4rem;
+    font-weight: 600;
+  }
+
+  .head > h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #4d5562;
+  }
+
+  section > div:nth-child(5n + 1) {
+    background-color: #fcf9f8;
+  }
+  section > div:nth-child(5n + 4) {
+    background-color: #121826;
+    color: white;
+  }
+  section > div:nth-child(4) {
+    border-radius: 1rem 1rem 0 0;
+  }
+  section > div:nth-child(49) {
+    border-radius: 0 0 1rem 1rem;
+    background-color: #7c4f1e;
+    color: white;
+  }
+  section > div:nth-child(n + 47):nth-child(-n + 50) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: #263fa9;
+  }
+  a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+  section > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  section > .head {
+    display: block;
+  }
+  .popular {
+    background-color: #263fa9;
+    color: white;
+    border-radius: 20px;
+    margin: 1.5rem 5rem;
+    padding: 0.25rem;
+  }
+  section > div:nth-child(4) {
+    padding-bottom: 2rem;
+  }
+  .service {
+    text-align: left;
+  }
+  @media (max-width: 1024px) {
+    section > div:nth-child(2) {
+      grid-area: 1 / 5;
+    }
+    section > div:nth-child(7) {
+      grid-area: 2 / 5;
+    }
+    section > div:nth-child(12) {
+      grid-area: 3 / 5;
+    }
+    section > div:nth-child(17) {
+      grid-area: 4 / 5;
+    }
+    section > div:nth-child(22) {
+      grid-area: 5 / 5;
+    }
+    section > div:nth-child(27) {
+      grid-area: 6 / 5;
+    }
+    section > div:nth-child(32) {
+      grid-area: 7 / 5;
+    }
+    section > div:nth-child(37) {
+      grid-area: 8 / 5;
+    }
+    section > div:nth-child(42) {
+      grid-area: 9 / 5;
+    }
+    section > div:nth-child(47) {
+      grid-area: 10 / 5;
+    }
+  }
+  @media (max-width: 640px) {
+    section > div:nth-child(4) {
+      grid-area: 1 / 3;
+    }
+    section > div:nth-child(9) {
+      grid-area: 2 / 3;
+    }
+    section > div:nth-child(14) {
+      grid-area: 3 / 3;
+    }
+    section > div:nth-child(19) {
+      grid-area: 4 / 3;
+    }
+    section > div:nth-child(24) {
+      grid-area: 5 / 3;
+    }
+    section > div:nth-child(29) {
+      grid-area: 6 / 3;
+    }
+    section > div:nth-child(34) {
+      grid-area: 7 / 3;
+    }
+    section > div:nth-child(39) {
+      grid-area: 8 / 3;
+    }
+    section > div:nth-child(44) {
+      grid-area: 9 / 3;
+    }
+    section > div:nth-child(49) {
+      grid-area: 10 / 3;
+    }
+    section > div:nth-child(5) {
+      grid-area: 1 / 2;
+    }
+    section > div:nth-child(10) {
+      grid-area: 2 / 2;
+    }
+    section > div:nth-child(15) {
+      grid-area: 3 / 2;
+    }
+    section > div:nth-child(20) {
+      grid-area: 4 / 2;
+    }
+    section > div:nth-child(25) {
+      grid-area: 5 / 2;
+    }
+    section > div:nth-child(30) {
+      grid-area: 6 / 2;
+    }
+    section > div:nth-child(35) {
+      grid-area: 7 / 2;
+    }
+    section > div:nth-child(40) {
+      grid-area: 8 / 2;
+    }
+    section > div:nth-child(45) {
+      grid-area: 9 / 2;
+    }
+    section > div:nth-child(50) {
+      grid-area: 10 / 2;
+    }
+  }
+  @media (max-width: 640px) {
+    section {
+      grid-template-columns: repeat(5, 200px);
+    }
+    .popular {
+      margin: 1.5rem 2.5rem;
+    }
+  }
+</style>

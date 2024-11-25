@@ -1,0 +1,109 @@
+---
+import type { Plan } from "../plan.type";
+
+interface Props {
+  plans: Plan[];
+}
+const { plans } = Astro.props;
+---
+
+<table>
+  <tr>
+    <td></td>
+    {
+      plans.map((plan) => {
+        return <td>{plan.tier}</td>;
+      })
+    }
+  </tr>
+  <tr>
+    <th>Website number</th>
+    {
+      plans.map((plan) => {
+        return <td>{plan.number}</td>;
+      })
+    }
+  </tr>
+  <tr>
+    <th>Server storage</th>
+    {
+      plans.map((plan) => {
+        return (
+          <td>
+            {plan.storage} {plan.number < 1000 ? "GB" : "TB"}
+          </td>
+        );
+      })
+    }
+  </tr>
+  <tr>
+    <th>Database</th>
+    {
+      plans.map((plan) => {
+        return <td>{plan.database}</td>;
+      })
+    }
+  </tr>
+  <tr>
+    <th>Unmetered bandwidth</th>
+    {
+      plans.map((plan) => {
+        return <td>{plan.bandwidth ? "ok" : "-"}</td>;
+      })
+    }
+  </tr>
+  <tr>
+    <th>SSD Disk</th>
+    {
+      plans.map((plan) => {
+        return <td>{plan.ssd ? "ok" : "-"}</td>;
+      })
+    }
+  </tr>
+  <tr>
+    <th>VCPUS Fontworld</th>
+    {
+      plans.map((plan) => {
+        return <td>{plan.vcpus ? "ok" : "-"}</td>;
+      })
+    }
+  </tr>
+  <tr>
+    <th>Wordpress install</th>
+    {
+      plans.map((plan) => {
+        return <td>{plan.wordpress ? "ok" : "-"}</td>;
+      })
+    }
+  </tr>
+  <tr>
+    <th>Server speed</th>
+    {
+      plans.map((plan) => {
+        return <td>{plan.serverSpeed ? "ok" : "-"}</td>;
+      })
+    }
+  </tr>
+</table>
+
+<style>
+  table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 60%;
+  }
+  table td:nth-child(4),
+  table th:nth-child(4) {
+    background-color: lightblue;
+  }
+
+  table tr td:nth-child(4) {
+  }
+
+  table tr:first-child td:nth-child(4) {
+    border-radius: 44px 44px 0 0;
+  }
+  table tr:last-child td:nth-child(4) {
+    border-radius: 0 0 44px 44px;
+  }
+</style>
